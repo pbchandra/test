@@ -1,0 +1,92 @@
+﻿{% load static %}
+<!Doctype html>
+<html>
+
+{% include "head.html" %}
+
+<body>
+    {% include "navbar.html" %}
+<br/>
+
+    <!--<div class="bgc ">
+    <div class="bgi ">
+
+        <div class="container centering">
+            <div class="row ">
+                <div class="col">
+
+                </div>
+                <div class="col text-center">
+                    <form action="encbtn">
+                        <input type="submit" class="btn  btn-lg btn-primary gap" value="Encrypt" />
+                    </form>
+                </div>
+                <div class="col">
+
+                </div>
+
+                <div class="col">
+                    <form action="decbtn">
+                        <input type="submit" class="btn  btn-lg btn-danger gap1" value="Decrypt" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>-->
+    <header>
+   
+    <video playsinline="playsinline" id="videoId" autoplay="autoplay" muted="muted" loop="loop" >
+        <source src="{% static 'img/test7.mp4' %}" type="video/mp4" >
+    </video>
+    <div class="container h-100">
+        <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+                <div class="container centering">
+                    <div class="row ">
+                        <div class="col">
+                            <div class="col text-center">
+                              
+                                
+                                    <a class="dropdown-toggle btn btn-lg btn-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="{% static 'img/image.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                                        Encrypt
+                    
+                                    </a>
+                    
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="Encrypt_and_download">Encrypt and download <img src="{% static 'img/download.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                                        </a>
+                                        {% if user.is_authenticated %}
+                                        <a class="dropdown-item" href="Encrypt_and_send">
+                                            Encrypt and send <img src="{% static 'img/email-send.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                                        </a>
+                                        
+                                        {% endif %}
+                                        <!--   <div class="dropdown-divider"></div>
+                                           <a class="dropdown-item" href="#">Something else here</a>-->
+                                    </div>
+                             
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+
+                        </div>
+
+                        <div class="col">
+                            <form action="decbtn">
+                                <input type="submit" class="btn  btn-lg btn-danger gap1" value="Decrypt" />
+                            </form>
+                        </div>
+                    </div>
+                    <p class="lead mb-0"></p>
+                </div>
+        </div>
+    </div>
+    </header>
+
+
+
+</body>
+</html>

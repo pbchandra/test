@@ -1,0 +1,184 @@
+﻿{% load static %}
+<!Doctype html>
+<html>
+{% include "head.html" %}
+
+<body>
+    {% include "navbar.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <br />
+                <form action="encryptandsend" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <label for="exampleFormControlFile1">From  </label>
+                    <input href="#" class="form-control" value="{{user.username}}" disabled>
+                    <input href="#" class="form-control" name="sendby" value="{{user.username}}" hidden>
+                    <br />
+
+                    {% endif %}
+                    <label for="exampleFormControlFile1">To  </label>
+                    <input list="wow" class="form-control  mr-sm-2" name="sendto" required>
+                    <datalist id="wow">
+                        {% for i in users_details %}
+                        <option value="{{i.username}}">
+                            {% endfor %}
+                    </datalist>
+
+                    <br />
+                    <br />
+                    
+
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Load a Image  </label>
+                        <input type="file" class="form-control-file" name="nrmlimg" id="exampleFormControlFile1" required>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Enter a message You want to encrypt </label>
+                        <textarea class="form-control" name="msg" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Please select 'Sensitivity' for the message : </label>
+                        <select class="custom-select mr-sm-2" id="customCryptoSelect" name="cryptographic_algorithm">
+                            <option value="low" selected>Low</option>
+                            <option value="medium">Medium</option>
+                            
+                            <option value="high">High</option>
+                            <option value="vhigh">Very High</option>
+                        </select>
+                        
+<small  style="color:#2a9d8f" id='no-key'>Please choose Higest sensitivity for the better security </small>
+ 
+                    </div>
+                    <div class="form-group">
+ <div class="input-group md-form form-sm form-2 pl-0" id="ceasar_input" hidden >
+  <input class="form-control my-0 py-1 red-border" name='secret_key_ceasar'  type="number" min="1" max="125" placeholder='Secret key' aria-label="Search">
+  
+  <div class="input-group-append">
+    <li href='test' class="input-group-text red lighten-3" ><img src="{% static 'img/key_img.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="" /></span></li>
+    
+  </div>
+  
+</div>
+ <div class="input-group md-form form-sm form-2 pl-0" id="des_input" hidden >
+  <input class="form-control my-0 py-1 red-border"  name='secret_key_des'  type="number" min="10000000" max="99999999" placeholder='Secret key' aria-label="Search">
+  
+  <div class="input-group-append">
+    <li  class="input-group-text red lighten-3" ><img src="{% static 'img/golden_key.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" /></span> </li>
+    
+  </div>
+  
+</div>
+<div class="input-group md-form form-sm form-2 pl-0" id="aes_input" hidden >
+  <input class="form-control my-0 py-1 red-border"  value='&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;' aria-label="Search" disabled>
+  <input class="form-control my-0 py-1 red-border"  name='secret_key_aes' value="{{key}}" placeholder='Secret key' aria-label="Search" hidden>
+  <div class="input-group-append">
+    <li  class="input-group-text red lighten-3" ><img src="{% static 'img/keygen.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" /></span> </li>
+    
+  </div>
+  
+
+
+
+
+
+</div>
+
+ <small style="color:#0096c7;" id='key_text_ceaser' hidden>key must contain 1 to 125 numbers  </small>
+ <small style="color:#FFD700;" id='key_text_des'hidden>key must contain 8 numbers  </small>
+ <small  style="color:#80b918;" id='key_text_aes'hidden>Secret key will be randomized and hidden  </small>
+</div>
+
+
+
+
+                    <label>Save Encrypted Image as</label>
+                    <div class="form-row">
+                        <div class="col">
+                           
+                            <input type="text" value="{{random_saveas}}" name="saveasname" class="form-control">
+
+                        </div>
+                        <div class="col">
+
+                            <select class="form-control" name="extension" id="sel1">
+                                <option>.png</option>
+
+                            </select>
+                           </div>
+                          
+                    </div>
+                    
+                    <small  style="color:#264653;">Name for the new image has been randomized, if you want you can update it   </small>
+                      
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Encrypt</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="col">
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+
+<script>
+$("input").change(function(e) {
+
+    for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+
+        var file = e.originalEvent.srcElement.files[i];
+
+        var img = document.createElement("img");
+    
+        var reader = new FileReader();
+        img.classList.add("img-thumbnail");
+        img.classList.add("img-position");
+        
+        img.classList.add("img-fluid");
+        reader.onloadend = function() {
+             img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+        $("input").after(img);
+        
+
+    }
+});
+
+</script>
+
+
+<script>
+
+
+document.getElementById('customCryptoSelect').onchange = function () {
+  document.getElementById("ceasar_input").hidden = (this.value != 'medium');
+  document.getElementById("des_input").hidden = (this.value != 'high');
+  document.getElementById("aes_input").hidden = (this.value != 'vhigh');
+  document.getElementById("key_text_ceaser").hidden = (this.value != 'medium');
+  document.getElementById("no-key").hidden = (this.value != 'low');
+  
+  document.getElementById("key_text_des").hidden = (this.value != 'high');
+   document.getElementById("key_text_aes").hidden = (this.value != 'vhigh');
+}
+</script>
+

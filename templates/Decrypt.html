@@ -1,0 +1,129 @@
+{% load static %}
+<!Doctype html>
+<html>
+{% include "head.html" %}
+
+<body>
+    {% include "navbar.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <br />
+                <form action="decryption" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Load a Image  </label>
+                        <input type="file" class="form-control-file" name="stignoimg" id="exampleFormControlFile1" required>
+                    </div>
+                
+                
+                
+
+                
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Sensitivity: </label>
+                        <select class="custom-select mr-sm-2" id="customCryptoSelect" name="cryptographic_algorithm">
+                            <option value="0">Low</option>
+                            <option value="1">Medium</option>
+                            <option value="2">High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+ <div class="input-group md-form form-sm form-2 pl-0" id="ceaser_input" hidden >
+  <input class="form-control my-0 py-1 red-border"  id="ceaser_inputdox"  name='secret_key'  type="number" min="1" max="125" placeholder='Secret key' aria-label="Search">
+  
+  <div class="input-group-append">
+    <button href='#' class="input-group-text red lighten-3" ><img src="{% static 'img/key_img.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="" /></span>
+    
+  </div>
+  
+</div>
+ <div class="input-group md-form form-sm form-2 pl-0" id="des_input" hidden >
+  <input class="form-control my-0 py-1 red-border"  id='des_inputdox'  name='secret_key_des' type="number" min="10000000" max="99999999" placeholder='Secret key' aria-label="Search">
+  
+  <div class="input-group-append">
+    <button href='test' class="input-group-text red lighten-3" ><img src="{% static 'img/golden_key.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" /></span>
+    
+  </div>
+  
+</div>
+
+<small style="color:#0096c7;" id='key_text_ceaser' hidden>key must contain 1 to 125 numbers  </small>
+<small style="color:#FFD700;" id='key_text_des'hidden>key must contain 8 numbers  </small>
+
+  </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="text" value="{{random_saveas}}" name="saveasname" class="form-control" hidden>
+                        </div>
+                        <div class="col">
+                
+                       
+                
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Decrypt</button>
+                     </div>
+                </form>
+                
+
+            </div>
+
+            <div class="col">
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</body>
+
+
+
+
+</html>
+
+
+<script>
+$("input").change(function(e) {
+
+    for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+
+        var file = e.originalEvent.srcElement.files[i];
+
+        var img = document.createElement("img");
+    
+        var reader = new FileReader();
+        img.classList.add("img-thumbnail");
+        img.classList.add("img-position");
+        
+        img.classList.add("img-fluid");
+        reader.onloadend = function() {
+             img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+        $("input").after(img);
+        
+
+    }
+});
+
+</script>
+
+
+
+
+<script>
+document.getElementById('customCryptoSelect').onchange = function () {
+  document.getElementById("ceaser_input").hidden = (this.value != '1');
+  document.getElementById("des_input").hidden = (this.value != '2');
+  document.getElementById("key_text_ceaser").hidden = (this.value != '1');
+  document.getElementById("key_text_des").hidden = (this.value != '2');
+}
+</script>

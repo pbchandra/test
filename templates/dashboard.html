@@ -1,0 +1,187 @@
+{% load static %}
+<!Doctype html>
+<html>
+{% include "head.html" %}
+<body style="background-color: #36486b;">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <a class="navbar-brand" href="/">
+        <img src="https://img.icons8.com/cotton/64/000000/laptop-key.png" width="30" height="30" class="d-inline-block align-top" alt="" />
+        Steganography
+    </a>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li>
+                <a href='#'>
+                    <img src="{% static 'img/info.png' %}" data-toggle="modal" data-target="#exampleModal" width="30" height="30" class="d-inline-block align-top" alt="" />
+
+
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"></a>
+            </li>
+            {% if user.is_authenticated %}
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static 'img/mail.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                    Inbox
+
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="../../sent">
+                        Sent <img src="{% static 'img/sent.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                    </a>
+                    <a class="dropdown-item" href="../../received">
+                        Received <img src="{% static 'img/receive.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                    </a>
+                    <!--<div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="dashboard">Dashboard</a>-->
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Options
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" href="../../Encrypt_and_download">
+                        Encrypt & Download <img src="{% static 'img/download.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                    </a>
+                    <a class="dropdown-item" href="../../Encrypt_and_send">
+                        Encrypt & Send <img src="{% static 'img/encryption.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                    </a>
+
+                    <a class="dropdown-item" href="../../decbtn">Decrypt  <img src="{% static 'img/decryption.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" /> </a>
+                    <!--<div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="accounts/dashboard">dashboard</a>-->
+                    
+                </div>
+            </li>
+            {%else%}
+            <p class="navbar-brand text-primary">Welcome! </p>
+            {%endif%}
+
+            <!--  <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li> -->
+        </ul>
+        <ul class="navbar-nav ">
+
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static 'img/users_img.png' %}" width="44" height="44" class="d-inline-block align-top" alt="" />
+                </a>
+
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="../logout">
+                        Log out <img src="{% static 'img/signout.png' %}" width="22" height="22" class="d-inline-block align-top" alt="" />
+                    </a>
+                    <a class="dropdown-item" href="./profile">
+                        Profile <img src="{% static 'img/user-settings.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" />
+                    </a>
+</li>
+            <li>
+                  <p class="p-3 text-primary"><i>Hello, {{user.first_name}}</i></p>
+
+            </li>
+            {% else %}
+
+            <li>
+                <a href="../register" class="btn btn-info my-2 my-sm-2" type="submit">Sign up</a>
+                <a href="../login" class="btn btn-outline-success my-2 my-sm-2" type="submit">Log in</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Steganography</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Steganography is the practice of concealing a file, message, image, or video within another file, message, image, or video.
+				
+				Algorithm: Embedded the secret message in the LSB
+according to the odd/even distribution method
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary-outline" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="container">
+
+
+        <div class="row">
+            <br />
+
+            <div class="col-lg-12">
+                <br />
+                <div class="card text-black bg-secoundry  mb-3" style="max-width: 80rem;">
+                    <div class="card-header text-secoundry text-center ">
+                        <h3><ion-icon class="text-warning " name="bookmarks-sharp"></ion-icon> Dashboard  <ion-icon class="text-warning " name="bookmarks-sharp"></ion-icon></h3>
+                    </div>
+                    <div class="card-body">
+
+
+                        {% if user.is_authenticated %}
+                        <div class="row">
+
+                            <div class="col">
+                                <div class="card bg-light mb-3" style="max-width: 18rem;">
+                                    <div class="card-header"><h4> <ion-icon name="send"></ion-icon> </h4></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a class="btn btn-danger"  href="../../sent">
+                                            Sent Items</a> </h5>
+                                        <p class="card-text"> <h4>{{sent_count}}&nbsp;&nbsp;<ion-icon name="images"></ion-icon> </h4></p>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card bg-light mb-3" style="max-width: 18rem;">
+                                    <div class="card-header"><img src="https://img.icons8.com/ios-filled/50/000000/mailbox-lock.png" height="30" width="30" /></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"> <a class="btn btn-info" href="../../received">
+                                            Received Items  </a></h5>
+                                        <p class="card-text"> <h4>{{received_count}}&nbsp;&nbsp;<ion-icon name="images"></ion-icon> </h4></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+ </div>
+            </div>
+
+
+</body>
+</html>

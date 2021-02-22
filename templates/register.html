@@ -1,0 +1,88 @@
+﻿{% load static %}
+<!Doctype html>
+<html>
+{% include "head.html" %}
+
+<body class="bgr">
+    {% include "new_navbar.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8"> </div>
+            <div class="col-lg-4">
+
+                <h2>Sign up</h2>
+
+
+
+                {% for dest in messages %}
+
+                <br />
+                <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+                    {{dest}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                {%endfor%}
+                <br />
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="title">First Name</label>
+                        <input type="text" class="form-control" name="first_name" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Last Name</label>
+                        <input type="test" class="form-control" name="last_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Username</label>
+                        <input type="text" class="form-control" name="username" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Email</label>
+                        <input type="text" class="form-control" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Password</label>
+                        <input type="password" class="form-control" name="password1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Confirm Password</label>
+                        <input type="password" class="form-control" name="password2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <br>
+                        <input type="submit" value='Sign Up' class="btn btn-primary" name="submit">
+                    </div>
+
+                </form>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+
+
+
+</body>
+</html>
+
+
+<style>
+    .bgr{
+        background-image: url("{% static 'img/bg-new.png' %}");
+        background-repeat: no-repeat;
+        height: 90vh;
+    }
+    
+    </style>

@@ -1,0 +1,135 @@
+﻿{% load static %}
+<!Doctype html>
+<html>
+{% include "head.html" %}
+
+<body>
+    {% include "navbar.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <br />
+                
+
+                {%for t in test%}
+
+                <br />
+                <br />
+                <form action="userdecryption" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Load a encrypted Image  </label>
+                        <img src="{% static '/encryptedimgs/' %}{{t.encryimg}}" name="stignoimg" class="img-thumbnail" />
+                    
+                    </div>
+                       <div class="form-group">
+                       <label>Image Name  </label>
+                       
+                        <input class="form-control"  type="text"  value="{{t.encryimg}}" disabled >
+                        <input type="text" name="stignoimg" value="{{t.encryimg}}" hidden>
+                        </div>
+                        <div class="form-group">
+                          
+                           <input type="text" name="p_id" value="{{t.id}}" hidden>
+                           </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Sensitivity: </label>
+                        <select class="custom-select mr-sm-2" id="customCryptoSelect" name="cryptographic_algorithm" required>
+                            
+                          <option value="" selected>--Please Select --</option>
+                            <option value="{{t.sensitivity}}" >{{t.sensitivity}}</option>
+
+                        </select>
+                    </div>
+
+
+                     <div class="form-group">
+ <div class="input-group md-form form-sm form-2 pl-0" id="ceasar_input" hidden >
+  <label  class="form-control" > secret key : {{t.secret_key}}</label>
+ 
+  <input class="form-control my-0 py-1 red-border" id="ceaser_inputdox" name='secret_key'  type="number" min="1" max="125"  placeholder='Secret key' aria-label="Search">
+  
+  <div class="input-group-append">
+    <li class="input-group-text red lighten-3" ><img src="{% static 'img/key_img.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="" /></span></li>
+    
+  </div>
+  
+</div>
+
+
+<div class="input-group md-form form-2 pl-0" id="des_input" hidden >
+  <!-- <label  class="form-control" > secret key : {{t.secret_key}}</label> -->
+  
+   <input class="form-control " value='{{t.secret_key}}' aria-label="Search" disabled>
+   <input class="form-control" id='aes_inputdox' name='secret_key_des' value='{{t.secret_key}}' aria-label="Search" hidden>
+   
+   
+   <div class="input-group-append">
+     <li  class="input-group-text red lighten-3" ><img src="{% static 'img/golden_key.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" /></span> </li>  
+   </div>
+   
+</div>
+<div class="input-group md-form form-2 pl-0" id="aes_input" hidden >
+ <!-- <label  class="form-control" > secret key : {{t.secret_key}}</label> -->
+ 
+  <input class="form-control " id='aes_inputdox' value='&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;' aria-label="Search" disabled>
+  
+  
+  <div class="input-group-append">
+    <li  class="input-group-text red lighten-3" ><img src="{% static 'img/golden_key.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" /></span> </li>  
+  </div>
+  
+</div>
+
+<small style="color:#0096c7;" id='key_text_ceaser' hidden>Please enter the correct used key to obtanin secret message </small>
+<small style="color:#ff006a;" id='key_text_des'hidden>key which is needed to obtain the hidden secret message </small>
+<small  style="color:#80b918;" id='key_text_aes'hidden>The randomized secret key will be hidden  </small>
+
+  </div>
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary">Decrypt</button>
+
+                </form>
+
+                {%endfor%}
+            </div>
+
+            <div class="col">
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+
+
+
+<script>
+document.getElementById('customCryptoSelect').onchange = function () {
+  document.getElementById("ceasar_input").hidden = (this.value != 'medium');
+  document.getElementById("ceaser_inputdox").required = (this.value == 'medium');
+  document.getElementById("des_input").hidden = (this.value != 'high');
+  document.getElementById("aes_input").hidden = (this.value != 'vhigh');
+  
+  document.getElementById("key_text_ceaser").hidden = (this.value != 'medium');
+  document.getElementById("key_text_des").hidden = (this.value != 'high');
+  document.getElementById("key_text_aes").hidden = (this.value != 'vhigh');
+
+  document.getElementById("ceaser_inputdox").required = (this.value == 'medium');
+  document.getElementById("des_inputdox").required = (this.value == 'high');
+  document.getElementById("aes_inputdox").required = (this.value == 'vhigh');
+}
+</script>
+

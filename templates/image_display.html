@@ -1,0 +1,34 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include "head.html" %}
+<body>
+    {% include "navbar.html" %}
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="col">
+                <div class="alert alert-success">
+                    <strong>Successfully!  encrpted the message &nbsp;  &nbsp; </strong>
+                </div>
+                <div class="alert alert-info">
+                    <strong>Info! </strong> please click on image to download
+                </div>
+            </div>
+            <div class="col" style="background-color: aqua">
+
+                <figure class="figure">
+                    <a href="{% static ''  %}{{filename}}" download>
+
+                        <img src="{% static '' %}{{filename}}" class="figure-img img-fluid rounded img-thumbnail" alt="kk" />
+
+
+                    </a>
+                </figure>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% include "head.html" %}
+<body>
+    {% include "navbar.html" %}
+    <div>
+    <div class="container-fluid " >
+        <div class="row" >
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                           <!-- <th scope="col"  > #</th> -->
+                            <th scope="col"  >Original Image</th>
+                            <th scope="col" >From</th>
+                            <th scope="col"  >To</th>
+                            
+                            <!--<th scope="col"  >key</th> -->
+                            <th scope="col" >sensitivity</th>
+                            <th scope="col" >Encrypted Image</th>
+                            
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for t in test%}
+                        
+                        <tr>
+                     <!--     <td scope="row"  >{{t.id}}</td> -->  
+                            <td>
+                                <p class="file-upload">
+                                    <a href="media/{{t.nrmlimg}}" >{{t.nrmlimg}}</a><br>
+                                </p>
+                            </td>
+
+                            <td  >{{t.sendby}}</td>
+                            <td  >{{t.sendto}}</td>
+                           
+                        <!--  <td  >{{t.secret_key}}</td> -->  
+                            <td  >{{t.sensitivity}}</td>
+                            <td  >
+                              
+                             {{t.encryimg}}<br>
+                                
+                            </td>
+
+                            <td>
+
+                                <form action="user_decrypt" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="text" class="btn btn-outline-info" name="p_id" value="{{t.id}}" hidden>
+
+                                    <input type="submit" class="btn btn-outline-info" value="Decrypt"><br>
+                                </form>
+                            </td>
+                            
+                        </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>
